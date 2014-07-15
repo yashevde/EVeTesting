@@ -3,6 +3,7 @@
 // 
 //  by miham -edited by yash (07/15/2014) to make MWDC configuration in
 //            simulation similar to the BH configuration
+//            ToDo: horizontal offset between MWDC1 and 2
 //
 //  This file contains all data regarding the Big Bite spectrometer
 //  (distances, sizes, wire numbers, etc.) 
