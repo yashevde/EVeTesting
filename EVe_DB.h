@@ -1,13 +1,13 @@
-//************************************************************************* 
+//**************************************************************************
 //  EVe_DB.h  - 4/14/2008
 // 
-//  by miham
-// 
-//  This file contains all data regarding the Big Bite spectrometer
-//  (distances, sizes, wire numbers, etc.)
-// 
+//  by miham -edited by yash (07/15/2014) to make MWDC configuration in
+//            simulation similar to the BH configuration
 //
-//************************************************************************* 
+//  This file contains all data regarding the Big Bite spectrometer
+//  (distances, sizes, wire numbers, etc.) 
+//
+//**************************************************************************
 
 #ifndef ROOT_EVe_DB
 #define ROOT_EVe_DB
@@ -20,7 +20,8 @@
 // 1. MWDC variables
 
 	/// Height of the first chamber  
-    	const double L1 = 2.00;
+    	const double L1 = 2.00;        
+//changed from 1.40 to 2.00 so that it is equal to height of the second chamber
 
 	/// Wire number per plane 
 	const int MWDC1_U1_WN = 141;
@@ -37,11 +38,12 @@
 // 2. MWDC variables
 
 	/// Height of the second chamber 
-    	const double L2 = 2.0; 
+    	const double L2 = 2.00; 
 
 	/// Distance between the begining of the first chamber and 
-	/// the beginning of the second
+	/// the beginning of the second 
 	const double MWDC2_z = 0.811813;
+        ///const double MWDC2_x = 0.6; ###yash 
 
 
 	/// Wire number per plane 
@@ -89,6 +91,7 @@
 	/// Distance between the begining of the first chamber and 
 	/// the beginning of the E scintillation plane;
 	const double E_z = 1.1;
+
 
 // U-projection variables
 
@@ -152,11 +155,11 @@
 	const double canvas_length = 4.0;
 
 	/// Position of the 1. MWDC inside a canvas in pixels
-	const double canvas_MWDC1_posx = 0.1; 
+	const double canvas_MWDC1_posx = 0.2; 
 	const double canvas_MWDC1_posy = 0.5;
 
-	/// Position of the 1. MWDC inside a canvas in pixels
-	const double canvas_MWDC2_posx = 0.3; 
+	/// Position of the 2. MWDC inside a canvas in pixels 
+	const double canvas_MWDC2_posx = 0.6; //0.3->0.6
 	const double canvas_MWDC2_posy = 0.5;
 
 	/// Position of the dE-plane inside a canvas in pixels
@@ -182,8 +185,10 @@
 	const double MWDC1_xpos = 225.0; // [cm] 
 	const double MWDC1_ypos = 0.0; // [cm]
 	const double MWDC1_zpos = 17.0; // [cm]
-	const double MWDC1_length = 35.0; // [cm]
-	const double MWDC1_height = 140.0; //[cm]
+	const double MWDC1_length = 50.0; // [cm] 
+//changed from 35 to 50 so that it is equal to length of the second chamber
+	const double MWDC1_height = 200.0; //[cm] 
+//changed from 140 to 200 so that it is equal to height of the second chamber
 	const double MWDC1_tilt  = 10.0; // [deg]
 
 
@@ -212,6 +217,7 @@
 	const double E_paddle_height = 8.6; //[cm]
 	const double E_paddle_thickness = 3.0; //[cm]
 	const double E_tilt  = 10.0; // [deg]
+
 
 // Technical Variables for internal puposes of ev. display
 	
