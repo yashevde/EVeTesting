@@ -1,14 +1,16 @@
-//************************************************************************* 
+//******************************************************************************
 //  BigBiteDetector3D.cxx  - 4/14/2008
 // 
-//  by miham
-// 
+//  by miham -edited by yash to only include the Wire Chambers (14/07/2014)
+//            #TODO: Only retain essential elements in a new file.
+//                   Study code flow and revise it to create new detector package
+//
 //  This class joins together magnet and all detectors (in 3D view) and creates 
 //  full 3D view of the Big Bite spectrometer. It also handles the
 //  creation and manipulation with 3D ( full and partial ) tracks.
 // 
 //
-//************************************************************************* 
+//******************************************************************************* 
 
 #include "BigBiteDetector3D.h"
 #include "TMath.h"
@@ -65,7 +67,7 @@ BigBiteDetector3D::BigBiteDetector3D()
       t1.SetTranslation(MWDC2_xpos, MWDC2_ypos, MWDC2_zpos);
       comb = new TGeoCombiTrans(t1, r1);
       top->AddNodeOverlap(mwdc_volume2,1, comb);
-
+/*
       // dE - Scintillation Plane
       TGeoVolume *scint_volume2 = mgr->MakeBox("scint_volume2",medium,111,5,100);
       scintdE = new ScintilationPlane3D((char*)"dE-ScintPlane",dE_PN,0,0,0,dE_paddle_length, dE_paddle_height, dE_paddle_thickness, scint_volume2);
@@ -89,11 +91,11 @@ BigBiteDetector3D::BigBiteDetector3D()
       target->SetLineColor(kBlack);
       top->AddNodeOverlap(target,1);
 
-
+*/
        // In the end we create potential tracks
        // Important: Track order is important :Full tracks must be created 
        // before partial tracks.
-	
+      
        // First we create full tracks
        fullTrack[0] = new FullTrajectory3D((char*)"FT1", top, mgr, (char*)"/TOP_1/");
        fullTrack[1] = new FullTrajectory3D((char*)"FT2", top, mgr, (char*)"/TOP_1/");
@@ -110,20 +112,20 @@ BigBiteDetector3D::BigBiteDetector3D()
        // Now we create partial tracks
        partialTrack[0] = new Trajectory3D((char*)"PT1", top, mgr, (char*)"/TOP_1/");
        partialTrack[1] = new Trajectory3D((char*)"PT2", top, mgr, (char*)"/TOP_1/");
-       partialTrack[2] = new Trajectory3D((char*)"PT3", top, mgr, (char*)"/TOP_1/");	
-       partialTrack[3] = new Trajectory3D((char*)"PT4", top, mgr, (char*)"/TOP_1/");	
-       partialTrack[4] = new Trajectory3D((char*)"PT5", top, mgr, (char*)"/TOP_1/");	
-       partialTrack[5] = new Trajectory3D((char*)"PT6", top, mgr, (char*)"/TOP_1/");	
-       partialTrack[6] = new Trajectory3D((char*)"PT7", top, mgr, (char*)"/TOP_1/");	
-       partialTrack[7] = new Trajectory3D((char*)"PT8", top, mgr, (char*)"/TOP_1/");	
-       partialTrack[8] = new Trajectory3D((char*)"PT9", top, mgr, (char*)"/TOP_1/");	
-       partialTrack[9] = new Trajectory3D((char*)"PT10", top, mgr, (char*)"/TOP_1/");		
+       partialTrack[2] = new Trajectory3D((char*)"PT3", top, mgr, (char*)"/TOP_1/");      
+       partialTrack[3] = new Trajectory3D((char*)"PT4", top, mgr, (char*)"/TOP_1/");      
+       partialTrack[4] = new Trajectory3D((char*)"PT5", top, mgr, (char*)"/TOP_1/");      
+       partialTrack[5] = new Trajectory3D((char*)"PT6", top, mgr, (char*)"/TOP_1/");      
+       partialTrack[6] = new Trajectory3D((char*)"PT7", top, mgr, (char*)"/TOP_1/");      
+       partialTrack[7] = new Trajectory3D((char*)"PT8", top, mgr, (char*)"/TOP_1/");      
+       partialTrack[8] = new Trajectory3D((char*)"PT9", top, mgr, (char*)"/TOP_1/");      
+       partialTrack[9] = new Trajectory3D((char*)"PT10", top, mgr, (char*)"/TOP_1/");           
 
        mgr->CloseGeometry();
        top->Raytrace();
 
 
-       cout<<"BigBite Created!"<<endl;
+       cout<<"MWDCs created!"<<endl;
 }
 
 
@@ -134,14 +136,14 @@ BigBiteDetector3D::~BigBiteDetector3D()
 
 
 void BigBiteDetector3D::ClearTracks()
-{	
-	
+{     
+      
        for (int i = 0; i<10; i++)
        {
-	  partialTrack[i]->ClearTrack();
-	  fullTrack[i]->ClearTrack();	
-       }	
-	
-	
+        partialTrack[i]->ClearTrack();
+        fullTrack[i]->ClearTrack(); 
+       }    
+      
+      
 
 }

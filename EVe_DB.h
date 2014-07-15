@@ -20,7 +20,7 @@
 // 1. MWDC variables
 
 	/// Height of the first chamber  
-    	const double L1 = 1.40;
+    	const double L1 = 2.00;
 
 	/// Wire number per plane 
 	const int MWDC1_U1_WN = 141;
