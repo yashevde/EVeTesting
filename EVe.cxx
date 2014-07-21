@@ -28,7 +28,7 @@
 // If you want full tracks set FULL_TRACK = 1, but for this you will also need some //additional variables.
 #define FULL_TRACK 0
 
-
+double Fake_hit[10] = {1,1,1,1,1,1,1,1,1,1}; //making a fake hit array -YASH
 
 using namespace std;
 
@@ -376,7 +376,7 @@ void EVe::initRun(char *filename)
 #if DEBUG_LEVEL >= 3
    cout<<"Number of Entries is: "<<TotalNumberOfEvents<<endl;
 #endif
-
+/*
   // Now we read all data
   t1->SetBranchAddress( "BB.mwdc.u1.nhits", &B_mwdc_u1_nhits);
   t1->SetBranchAddress( "BB.mwdc.u1p.nhits", &B_mwdc_u1p_nhits);
@@ -469,7 +469,7 @@ void EVe::initRun(char *filename)
   t1->SetBranchAddress( "BB.mwdc.u.ngood", &B_mwdc_u_ngood);
   t1->SetBranchAddress( "BB.mwdc.v.ngood", &B_mwdc_v_ngood);
   t1->SetBranchAddress( "BB.mwdc.x.ngood", &B_mwdc_x_ngood);
-
+*/
 
   //t1->SetBranchAddress( "BB.tr.n", &B_tr_n);
   //t1->SetBranchAddress( "BB.tr.x", &B_tr_x);
@@ -550,7 +550,7 @@ void EVe::DoDraw(int event)
 #if DEBUG_LEVEL >= 3
         cout<<"***** U1 Wire No.: "<<B_mwdc_u1_hit_wire[i]<<" is: "<<B_mwdc_u1_hit_time[i]<<endl;
 #endif
-        u1->SetWire(B_mwdc_u1_hit_wire[i],1.0E9*B_mwdc_u1_hit_time[i]); 
+        u1->SetWire(Fake_hit[i],1.0E9*1); 
     }
     
     for (int i = 0; i<B_mwdc_u1p_nhits; i++)
@@ -590,52 +590,52 @@ void EVe::DoDraw(int event)
 #if DEBUG_LEVEL >= 3
         cout<<"******** Data for road No.: "<<j<<" of: "<<B_mwdc_u_nroads<<" ************"<<endl;
         cout<<"-----> zL: "<<B_mwdc_u_rd_zL[j]<<endl;
-	cout<<"-----> zU: "<<B_mwdc_u_rd_zU[j]<<endl;
-	cout<<"-----> xLL: "<<B_mwdc_u_rd_xLL[j]<<endl;
-	cout<<"-----> xLR: "<<B_mwdc_u_rd_xLR[j]<<endl;
-	cout<<"-----> xUL: "<<B_mwdc_u_rd_xUL[j]<<endl;
-	cout<<"-----> xUR: "<<B_mwdc_u_rd_xUR[j]<<endl;
+  cout<<"-----> zU: "<<B_mwdc_u_rd_zU[j]<<endl;
+  cout<<"-----> xLL: "<<B_mwdc_u_rd_xLL[j]<<endl;
+  cout<<"-----> xLR: "<<B_mwdc_u_rd_xLR[j]<<endl;
+  cout<<"-----> xUL: "<<B_mwdc_u_rd_xUL[j]<<endl;
+  cout<<"-----> xUR: "<<B_mwdc_u_rd_xUR[j]<<endl;
         cout<<endl;
-	cout<<"-----> good: "<<B_mwdc_u_rd_good[j]<<endl;
-	cout<<"-----> chi2: "<<B_mwdc_u_rd_chi2[j]<<endl;
-	cout<<"-----> pos: "<<B_mwdc_u_rd_pos[j]<<endl;
-	cout<<"-----> slope: "<<B_mwdc_u_rd_slope[j]<<endl;
+  cout<<"-----> good: "<<B_mwdc_u_rd_good[j]<<endl;
+  cout<<"-----> chi2: "<<B_mwdc_u_rd_chi2[j]<<endl;
+  cout<<"-----> pos: "<<B_mwdc_u_rd_pos[j]<<endl;
+  cout<<"-----> slope: "<<B_mwdc_u_rd_slope[j]<<endl;
         cout<<"************************************************"<<endl;
 #endif
-	
+  
 
 cout<<"Sem tlele 1"<<endl;
-	 Double_t y[4] = {B_mwdc_u_rd_zL[j],
-			  B_mwdc_u_rd_zU[j],
-			  B_mwdc_u_rd_zU[j], 
-			  B_mwdc_u_rd_zL[j]};
+   Double_t y[4] = {B_mwdc_u_rd_zL[j],
+        B_mwdc_u_rd_zU[j],
+        B_mwdc_u_rd_zU[j], 
+        B_mwdc_u_rd_zL[j]};
 
         Double_t x[4] = {B_mwdc_u_rd_xLL[j],
-			 B_mwdc_u_rd_xUL[j], 
-			 B_mwdc_u_rd_xUR[j], 
-			 B_mwdc_u_rd_xLR[j]};
+       B_mwdc_u_rd_xUL[j], 
+       B_mwdc_u_rd_xUR[j], 
+       B_mwdc_u_rd_xLR[j]};
 
-cout<<"Sem tlele 2"<<endl;	
+cout<<"Sem tlele 2"<<endl;  
 
-	if (fTextButtonRoads->IsOn()) umrd->Show(j,x,y);
+  if (fTextButtonRoads->IsOn()) umrd->Show(j,x,y);
 
 cout<<"Sem tlele 3"<<endl;
         if (B_mwdc_u_rd_good[j]>0 && (fTextButtonTrackProj->IsOn()) )
-	{
+  {
 cout<<"Sem tlele 3a"<<endl;
-		// If road is good, then we draw the calculated track.
-		double tz1 = -0.4; // in meters
-		double tz2 = 1.2; // in meters
+    // If road is good, then we draw the calculated track.
+    double tz1 = -0.4; // in meters
+    double tz2 = 1.2; // in meters
 cout<<"Sem tlele 3b"<<endl;
-		double tx1 = B_mwdc_u_rd_slope[j]*tz1 + B_mwdc_u_rd_pos[j];
+    double tx1 = B_mwdc_u_rd_slope[j]*tz1 + B_mwdc_u_rd_pos[j];
 cout<<"Sem tlele 3c"<<endl;
-		double tx2 = B_mwdc_u_rd_slope[j]*tz2 + B_mwdc_u_rd_pos[j];
-		
+    double tx2 = B_mwdc_u_rd_slope[j]*tz2 + B_mwdc_u_rd_pos[j];
+    
 cout<<"Sem tlele 3d"<<endl;
 cout<<j<<endl;
-		utr[j]->DrawMe(tx1,tz1,tx2,tz2);
+    utr[j]->DrawMe(tx1,tz1,tx2,tz2);
 cout<<"Sem tlele 3e"<<endl;
-	}
+  }
     }
 cout<<"Sem tlele 4"<<endl;
     c1->Draw();
@@ -717,40 +717,40 @@ cout<<"Sem tlele 5"<<endl;
 #if DEBUG_LEVEL >= 3
         cout<<"******** Data for V road No.: "<<j<<" ************"<<endl;
         cout<<"-----> zL: "<<B_mwdc_v_rd_zL[j]<<endl;
-	cout<<"-----> zU: "<<B_mwdc_v_rd_zU[j]<<endl;
-	cout<<"-----> xLL: "<<B_mwdc_v_rd_xLL[j]<<endl;
-	cout<<"-----> xLR: "<<B_mwdc_v_rd_xLR[j]<<endl;
-	cout<<"-----> xUL: "<<B_mwdc_v_rd_xUL[j]<<endl;
-	cout<<"-----> xUR: "<<B_mwdc_v_rd_xUR[j]<<endl;
+  cout<<"-----> zU: "<<B_mwdc_v_rd_zU[j]<<endl;
+  cout<<"-----> xLL: "<<B_mwdc_v_rd_xLL[j]<<endl;
+  cout<<"-----> xLR: "<<B_mwdc_v_rd_xLR[j]<<endl;
+  cout<<"-----> xUL: "<<B_mwdc_v_rd_xUL[j]<<endl;
+  cout<<"-----> xUR: "<<B_mwdc_v_rd_xUR[j]<<endl;
         cout<<endl;
-	cout<<"-----> good: "<<B_mwdc_v_rd_good[j]<<endl;
-	cout<<"-----> chi2: "<<B_mwdc_v_rd_chi2[j]<<endl;
-	cout<<"-----> pos: "<<B_mwdc_v_rd_pos[j]<<endl;
-	cout<<"-----> slope: "<<B_mwdc_v_rd_slope[j]<<endl;
+  cout<<"-----> good: "<<B_mwdc_v_rd_good[j]<<endl;
+  cout<<"-----> chi2: "<<B_mwdc_v_rd_chi2[j]<<endl;
+  cout<<"-----> pos: "<<B_mwdc_v_rd_pos[j]<<endl;
+  cout<<"-----> slope: "<<B_mwdc_v_rd_slope[j]<<endl;
         cout<<"************************************************"<<endl;
 #endif
-	 Double_t y[4] = {B_mwdc_v_rd_zL[j],
-			  B_mwdc_v_rd_zU[j],
-			  B_mwdc_v_rd_zU[j], 
-			  B_mwdc_v_rd_zL[j]};
+   Double_t y[4] = {B_mwdc_v_rd_zL[j],
+        B_mwdc_v_rd_zU[j],
+        B_mwdc_v_rd_zU[j], 
+        B_mwdc_v_rd_zL[j]};
 
         Double_t x[4] = {B_mwdc_v_rd_xLL[j],
-			 B_mwdc_v_rd_xUL[j], 
-			 B_mwdc_v_rd_xUR[j], 
-			 B_mwdc_v_rd_xLR[j]};
-	
-	if (fTextButtonRoads->IsOn()) vmrd->Show(j,x,y);
+       B_mwdc_v_rd_xUL[j], 
+       B_mwdc_v_rd_xUR[j], 
+       B_mwdc_v_rd_xLR[j]};
+  
+  if (fTextButtonRoads->IsOn()) vmrd->Show(j,x,y);
 
         if (B_mwdc_v_rd_good[j]>0 && fTextButtonTrackProj->IsOn() )
-	{
-		// If road is good, then we draw the calculated track.
-		double tz1 = -0.4; // in meters
-		double tz2 = 1.2; // in meters
-		double tx1 = B_mwdc_v_rd_slope[j]*tz1 + B_mwdc_v_rd_pos[j];
-		double tx2 = B_mwdc_v_rd_slope[j]*tz2 + B_mwdc_v_rd_pos[j];
-		
-		vtr[j]->DrawMe(tx1,tz1,tx2,tz2);
-	}
+  {
+    // If road is good, then we draw the calculated track.
+    double tz1 = -0.4; // in meters
+    double tz2 = 1.2; // in meters
+    double tx1 = B_mwdc_v_rd_slope[j]*tz1 + B_mwdc_v_rd_pos[j];
+    double tx2 = B_mwdc_v_rd_slope[j]*tz2 + B_mwdc_v_rd_pos[j];
+    
+    vtr[j]->DrawMe(tx1,tz1,tx2,tz2);
+  }
     }
     c2->Draw();
     c2->Update(); 
@@ -829,40 +829,40 @@ cout<<"Sem tlele 5"<<endl;
 #if DEBUG_LEVEL >= 3
         cout<<"******** Data for X road No.: "<<" ************"<<endl;
         cout<<"-----> zL: "<<B_mwdc_x_rd_zL[j]<<endl;
-	cout<<"-----> zU: "<<B_mwdc_x_rd_zU[j]<<endl;
-	cout<<"-----> xLL: "<<B_mwdc_x_rd_xLL[j]<<endl;
-	cout<<"-----> xLR: "<<B_mwdc_x_rd_xLR[j]<<endl;
-	cout<<"-----> xUL: "<<B_mwdc_x_rd_xUL[j]<<endl;
-	cout<<"-----> xUR: "<<B_mwdc_x_rd_xUR[j]<<endl;
+  cout<<"-----> zU: "<<B_mwdc_x_rd_zU[j]<<endl;
+  cout<<"-----> xLL: "<<B_mwdc_x_rd_xLL[j]<<endl;
+  cout<<"-----> xLR: "<<B_mwdc_x_rd_xLR[j]<<endl;
+  cout<<"-----> xUL: "<<B_mwdc_x_rd_xUL[j]<<endl;
+  cout<<"-----> xUR: "<<B_mwdc_x_rd_xUR[j]<<endl;
         cout<<endl;
-	cout<<"-----> good: "<<B_mwdc_x_rd_good[j]<<endl;
-	cout<<"-----> chi2: "<<B_mwdc_x_rd_chi2[j]<<endl;
-	cout<<"-----> pos: "<<B_mwdc_x_rd_pos[j]<<endl;
-	cout<<"-----> slope: "<<B_mwdc_x_rd_slope[j]<<endl;
+  cout<<"-----> good: "<<B_mwdc_x_rd_good[j]<<endl;
+  cout<<"-----> chi2: "<<B_mwdc_x_rd_chi2[j]<<endl;
+  cout<<"-----> pos: "<<B_mwdc_x_rd_pos[j]<<endl;
+  cout<<"-----> slope: "<<B_mwdc_x_rd_slope[j]<<endl;
         cout<<"************************************************"<<endl;
-#endif	
-	 Double_t y[4] = {B_mwdc_x_rd_zL[j],
-			  B_mwdc_x_rd_zU[j],
-			  B_mwdc_x_rd_zU[j], 
-			  B_mwdc_x_rd_zL[j]};
+#endif  
+   Double_t y[4] = {B_mwdc_x_rd_zL[j],
+        B_mwdc_x_rd_zU[j],
+        B_mwdc_x_rd_zU[j], 
+        B_mwdc_x_rd_zL[j]};
 
         Double_t x[4] = {B_mwdc_x_rd_xLL[j],
-			 B_mwdc_x_rd_xUL[j], 
-			 B_mwdc_x_rd_xUR[j], 
-			 B_mwdc_x_rd_xLR[j]};
-	
-	if (fTextButtonRoads->IsOn()) xmrd->Show(j,x,y);
+       B_mwdc_x_rd_xUL[j], 
+       B_mwdc_x_rd_xUR[j], 
+       B_mwdc_x_rd_xLR[j]};
+  
+  if (fTextButtonRoads->IsOn()) xmrd->Show(j,x,y);
 
         if (B_mwdc_x_rd_good[j]>0 && fTextButtonTrackProj->IsOn())
-	{
-		// If road is good, then we draw the calculated track.
-		double tz1 = -0.4; // in meters
-		double tz2 = 1.2; // in meters
-		double tx1 = B_mwdc_x_rd_slope[j]*tz1 + B_mwdc_x_rd_pos[j];
-		double tx2 = B_mwdc_x_rd_slope[j]*tz2 + B_mwdc_x_rd_pos[j];
-		
-		xtr[j]->DrawMe(tx1,tz1,tx2,tz2);
-	}
+  {
+    // If road is good, then we draw the calculated track.
+    double tz1 = -0.4; // in meters
+    double tz2 = 1.2; // in meters
+    double tx1 = B_mwdc_x_rd_slope[j]*tz1 + B_mwdc_x_rd_pos[j];
+    double tx2 = B_mwdc_x_rd_slope[j]*tz2 + B_mwdc_x_rd_pos[j];
+    
+    xtr[j]->DrawMe(tx1,tz1,tx2,tz2);
+  }
     }
   
     c4->Draw();
@@ -885,7 +885,7 @@ cout<<"Sem tlele 5"<<endl;
     //***************** First Chamber
 
 #if DEBUG_LEVEL >= 3
-    cout<<"Plane U1 has been hit ... times: "<<B_mwdc_u1_nhits<<endl;
+    cout<<"Plane U1 has been hit ... times: "<<Fake_hit<<endl;
     cout<<"Plane U1p has been hit ... times: "<<B_mwdc_u1p_nhits<<endl;
     cout<<"Plane V1 has been hit ... times: "<<B_mwdc_v1_nhits<<endl;
     cout<<"Plane V1p has been hit ... times: "<<B_mwdc_v1p_nhits<<endl;
@@ -897,7 +897,7 @@ cout<<"Sem tlele 5"<<endl;
     for(int i = 0; i<B_mwdc_u1_nhits; i++)
     {
 #if DEBUG_LEVEL >= 3
-	cout<<"Wire u1 : "<<i<<" je: "<<B_mwdc_u1_hit_wire[i]<<endl;
+  cout<<"Wire u1 : "<<i<<" je: "<<B_mwdc_u1_hit_wire[i]<<endl;
 #endif
         mwdc1->u1WireHit(B_mwdc_u1_hit_wire[i]);
     } 
@@ -905,7 +905,7 @@ cout<<"Sem tlele 5"<<endl;
     for(int i = 0; i<B_mwdc_u1p_nhits; i++)
     {
 #if DEBUG_LEVEL >= 3
-	cout<<"Wire u1p : "<<i<<" je: "<<B_mwdc_u1p_hit_wire[i]<<endl;
+  cout<<"Wire u1p : "<<i<<" je: "<<B_mwdc_u1p_hit_wire[i]<<endl;
 #endif
         mwdc1->u2WireHit(B_mwdc_u1p_hit_wire[i]);
     } 
@@ -914,7 +914,7 @@ cout<<"Sem tlele 5"<<endl;
     for(int i = 0; i<B_mwdc_v1_nhits; i++)
     {
 #if DEBUG_LEVEL >= 3
-	cout<<"Wire v1 : "<<i<<" je: "<<B_mwdc_v1_hit_wire[i]<<endl;
+  cout<<"Wire v1 : "<<i<<" je: "<<B_mwdc_v1_hit_wire[i]<<endl;
 #endif
         mwdc1->v1WireHit(B_mwdc_v1_hit_wire[i]);
     } 
@@ -922,7 +922,7 @@ cout<<"Sem tlele 5"<<endl;
     for(int i = 0; i<B_mwdc_v1p_nhits; i++)
     {
 #if DEBUG_LEVEL >= 3
-	cout<<"Wire v1p : "<<i<<" je: "<<B_mwdc_v1p_hit_wire[i]<<endl;
+  cout<<"Wire v1p : "<<i<<" je: "<<B_mwdc_v1p_hit_wire[i]<<endl;
 #endif
         mwdc1->v2WireHit(B_mwdc_v1p_hit_wire[i]);
     } 
@@ -931,7 +931,7 @@ cout<<"Sem tlele 5"<<endl;
     for(int i = 0; i<B_mwdc_x1_nhits; i++)
     {
 #if DEBUG_LEVEL >= 3
-	cout<<"Wire x1 : "<<i<<" je: "<<B_mwdc_x1_hit_wire[i]<<endl;
+  cout<<"Wire x1 : "<<i<<" je: "<<B_mwdc_x1_hit_wire[i]<<endl;
 #endif
         mwdc1->x1WireHit(B_mwdc_x1_hit_wire[i]);
     } 
@@ -940,7 +940,7 @@ cout<<"Sem tlele 5"<<endl;
     for(int i = 0; i<B_mwdc_x1p_nhits; i++)
     {
 #if DEBUG_LEVEL >= 3
-	cout<<"Wire x1p : "<<i<<" je: "<<B_mwdc_x1p_hit_wire[i]<<endl;
+  cout<<"Wire x1p : "<<i<<" je: "<<B_mwdc_x1p_hit_wire[i]<<endl;
 #endif
         mwdc1->x2WireHit(B_mwdc_x1p_hit_wire[i]);
     } 
@@ -961,7 +961,7 @@ cout<<"Sem tlele 5"<<endl;
     for(int i = 0; i<B_mwdc_u2_nhits; i++)
     {
 #if DEBUG_LEVEL >= 3
-	cout<<"Wire u2 : "<<i<<" je: "<<B_mwdc_u2_hit_wire[i]<<endl;
+  cout<<"Wire u2 : "<<i<<" je: "<<B_mwdc_u2_hit_wire[i]<<endl;
 #endif
         mwdc2->u1WireHit(B_mwdc_u2_hit_wire[i]);
     } 
@@ -969,7 +969,7 @@ cout<<"Sem tlele 5"<<endl;
     for(int i = 0; i<B_mwdc_u2p_nhits; i++)
     {
 #if DEBUG_LEVEL >= 3
-	cout<<"Wire u2p : "<<i<<" je: "<<B_mwdc_u2p_hit_wire[i]<<endl;
+  cout<<"Wire u2p : "<<i<<" je: "<<B_mwdc_u2p_hit_wire[i]<<endl;
 #endif
         mwdc2->u2WireHit(B_mwdc_u2p_hit_wire[i]);
     } 
@@ -978,7 +978,7 @@ cout<<"Sem tlele 5"<<endl;
     for(int i = 0; i<B_mwdc_v2_nhits; i++)
     {
 #if DEBUG_LEVEL >= 3
-	cout<<"Wire v2 : "<<i<<" je: "<<B_mwdc_v2_hit_wire[i]<<endl;
+  cout<<"Wire v2 : "<<i<<" je: "<<B_mwdc_v2_hit_wire[i]<<endl;
 #endif
         mwdc2->v1WireHit(B_mwdc_v2_hit_wire[i]);
     } 
@@ -986,7 +986,7 @@ cout<<"Sem tlele 5"<<endl;
     for(int i = 0; i<B_mwdc_v2p_nhits; i++)
     {
 #if DEBUG_LEVEL >= 3
-	cout<<"Wire v2p : "<<i<<" je: "<<B_mwdc_v2p_hit_wire[i]<<endl;
+  cout<<"Wire v2p : "<<i<<" je: "<<B_mwdc_v2p_hit_wire[i]<<endl;
 #endif
         mwdc2->v2WireHit(B_mwdc_v2p_hit_wire[i]);
     } 
@@ -995,7 +995,7 @@ cout<<"Sem tlele 5"<<endl;
     for(int i = 0; i<B_mwdc_x2_nhits; i++)
     {
 #if DEBUG_LEVEL >= 3
-	cout<<"Wire x2 : "<<i<<" je: "<<B_mwdc_x2_hit_wire[i]<<endl;
+  cout<<"Wire x2 : "<<i<<" je: "<<B_mwdc_x2_hit_wire[i]<<endl;
 #endif
         mwdc2->x1WireHit(B_mwdc_x2_hit_wire[i]);
     } 
@@ -1004,7 +1004,7 @@ cout<<"Sem tlele 5"<<endl;
     for(int i = 0; i<B_mwdc_x2p_nhits; i++)
     {
 #if DEBUG_LEVEL >= 3
-	cout<<"Wire x2p : "<<i<<" je: "<<B_mwdc_x2p_hit_wire[i]<<endl;
+  cout<<"Wire x2p : "<<i<<" je: "<<B_mwdc_x2p_hit_wire[i]<<endl;
 #endif
         mwdc2->x2WireHit(B_mwdc_x2p_hit_wire[i]);
     } 
@@ -1021,24 +1021,24 @@ cout<<"Sem tlele 5"<<endl;
 
    for (int q = 0; q<E_PN; q++) Ebar_ypos[q] = 0.0;
    for (int q = 0; q<dE_PN; q++) dEbar_ypos[q] = 0.0;
-	
+  
    for (Int_t q = 0; q<B_tp_e_nhit; q++)
    {
-	int bar = (int)(B_tp_e_hit_bar[q]);
+  int bar = (int)(B_tp_e_hit_bar[q]);
         double ypos = B_tp_e_hit_ypos[q];
-	Ebar_ypos[bar] = ypos;
+  Ebar_ypos[bar] = ypos;
 #if DEBUG_LEVEL >= 3
-	cout<<"--> Bar E: "<<bar<<" Y pos: "<<ypos<<endl;
+  cout<<"--> Bar E: "<<bar<<" Y pos: "<<ypos<<endl;
 #endif
    }
    
    for (int q = 0; q<B_tp_de_nhit; q++)
    {
-	int bar = (int)(B_tp_de_hit_bar[q]);
+  int bar = (int)(B_tp_de_hit_bar[q]);
         double ypos = B_tp_de_hit_ypos[q];
-	dEbar_ypos[bar] = ypos;
+  dEbar_ypos[bar] = ypos;
 #if DEBUG_LEVEL >= 3
-	cout<<"--> Bar dE: "<<bar<<" Y pos: "<<ypos<<endl;
+  cout<<"--> Bar dE: "<<bar<<" Y pos: "<<ypos<<endl;
 #endif
    }
 
@@ -1047,73 +1047,73 @@ cout<<"Sem tlele 5"<<endl;
     for (int i = 0; i<dE_PN; i++)
     {
 #if DEBUG_LEVEL >= 3
-	cout<<"| dE -L: "<<B_tp_de_LT[i]<<" dE - R: "<<B_tp_de_RT[i]<<".....YPOS: "<<dEbar_ypos[i]<<" |"<<endl;
+  cout<<"| dE -L: "<<B_tp_de_LT[i]<<" dE - R: "<<B_tp_de_RT[i]<<".....YPOS: "<<dEbar_ypos[i]<<" |"<<endl;
 #endif
 
-	sdE->paddleHit(i,B_tp_de_LT[i] ,B_tp_de_RT[i] , -dEbar_ypos[i]);
+  sdE->paddleHit(i,B_tp_de_LT[i] ,B_tp_de_RT[i] , -dEbar_ypos[i]);
     }  
 
 for (int i = 0; i<E_PN; i++)
     {
 #if DEBUG_LEVEL >= 3
-	cout<<"| E -L: "<<B_tp_e_LT[i]<<" E - R: "<<B_tp_e_RT[i]<<".....YPOS:"<<Ebar_ypos[i]<<"|"<<endl;
+  cout<<"| E -L: "<<B_tp_e_LT[i]<<" E - R: "<<B_tp_e_RT[i]<<".....YPOS:"<<Ebar_ypos[i]<<"|"<<endl;
 #endif
 
-	sE->paddleHit(i,B_tp_e_LT[i] ,B_tp_e_RT[i] , -Ebar_ypos[i]);	
+  sE->paddleHit(i,B_tp_e_LT[i] ,B_tp_e_RT[i] , -Ebar_ypos[i]);  
     }  
 
 */
 
     //****** Now we draw Trajectories through detectors
-    	 
+       
     if (B_tr_n>0  && fTextButtonTrack->IsOn())
-    {		
-	for(int q =0; q<B_tr_n; q++)
-	{
-		double x0 = B_tr_x[q];
-		double y0 = B_tr_y[q];
- 		double th = B_tr_th[q];
-		double ph = B_tr_ph[q];
+    {   
+  for(int q =0; q<B_tr_n; q++)
+  {
+    double x0 = B_tr_x[q];
+    double y0 = B_tr_y[q];
+    double th = B_tr_th[q];
+    double ph = B_tr_ph[q];
 
-		double z1 = MWDC2_z; ///!!! This value depends of the exp. setting
-		//double x1 = x0 + tan(th)*z1;
-		//double y1 = y0 + tan(ph)*z1;
-		double x1 = x0 + th*z1;
-		double y1 = y0 + ph*z1;    
+    double z1 = MWDC2_z; ///!!! This value depends of the exp. setting
+    //double x1 = x0 + tan(th)*z1;
+    //double y1 = y0 + tan(ph)*z1;
+    double x1 = x0 + th*z1;
+    double y1 = y0 + ph*z1;    
   
 //#if DEBUG_LEVEL >= 3
-		cout<<"Q: "<<q<<endl;
-		cout<<"~~~~~>th0: "<<th<<", ph0: "<<ph<<endl;
-		cout<<"~~~~~>x0: "<<x0<<", y0: "<<y0<<endl;
-		cout<<"~~~~~>x1: "<<x1<<", y1: "<<y1<<endl;
+    cout<<"Q: "<<q<<endl;
+    cout<<"~~~~~>th0: "<<th<<", ph0: "<<ph<<endl;
+    cout<<"~~~~~>x0: "<<x0<<", y0: "<<y0<<endl;
+    cout<<"~~~~~>x1: "<<x1<<", y1: "<<y1<<endl;
 //#endif
-		mwdc1->Track(x0,y0,q);
-		mwdc2->Track(x1,y1,q);
+    mwdc1->Track(x0,y0,q);
+    mwdc2->Track(x1,y1,q);
 
 
-		double z3 = dE_z;
-		//double x3 = x0 + tan(th)*z3;
-		//double y3 = y0 + tan(ph)*z3;
-		double x3 = x0 + th*z3;
-		double y3 = y0 + ph*z3;
+    double z3 = dE_z;
+    //double x3 = x0 + tan(th)*z3;
+    //double y3 = y0 + tan(ph)*z3;
+    double x3 = x0 + th*z3;
+    double y3 = y0 + ph*z3;
 
-#if DEBUG_LEVEL >= 3	
-		cout<<"~~~~~>x3: "<<x3<<", y3: "<<y3<<endl;
+#if DEBUG_LEVEL >= 3  
+    cout<<"~~~~~>x3: "<<x3<<", y3: "<<y3<<endl;
 #endif
-		sdE->Track(x3,y3,q);
+    sdE->Track(x3,y3,q);
 
-		double z4 = E_z;
-		//double x4 = x0 + tan(th)*z4;
-		//double y4 = y0 + tan(ph)*z4;
-		double x4 = x0 + th*z4;
-		double y4 = y0 + ph*z4;
+    double z4 = E_z;
+    //double x4 = x0 + tan(th)*z4;
+    //double y4 = y0 + tan(ph)*z4;
+    double x4 = x0 + th*z4;
+    double y4 = y0 + ph*z4;
 
 
-#if DEBUG_LEVEL >= 3	
-		cout<<"~~~~~>x4: "<<x4<<", y4: "<<y4<<endl;
+#if DEBUG_LEVEL >= 3  
+    cout<<"~~~~~>x4: "<<x4<<", y4: "<<y4<<endl;
 #endif
-		sE->Track(x4,y4,q);
-	}
+    sE->Track(x4,y4,q);
+  }
   
     }  
 
@@ -1139,34 +1139,36 @@ for (int i = 0; i<E_PN; i++)
     //***************** First chamber
 
     bigbite->mwdc1->clear();
-    for(int i = 0; i<B_mwdc_u1_nhits; i++)
+    for(int i = 0; i<10; i++)
     {
-#if DEBUG_LEVEL >= 3	
-	cout<<"Wire u1 : "<<i<<" je: "<<B_mwdc_u1_hit_wire[i]<<endl;
+#if DEBUG_LEVEL >= 3  
+  cout<<"Wire u1 : "<<i<<" je: "<<Fake_hit[i]<<endl;
 #endif
         bigbite->mwdc1->u1WireHit(B_mwdc_u1_hit_wire[i]);
     } 
 
+/* COMMENTED OUT BY YASH TO JUST SEE TRACKS ON U1
+
     for(int i = 0; i<B_mwdc_u1p_nhits; i++)
     {
-#if DEBUG_LEVEL >= 3	
-	cout<<"Wire u1p : "<<i<<" je: "<<B_mwdc_u1p_hit_wire[i]<<endl;
+#if DEBUG_LEVEL >= 3  
+  cout<<"Wire u1p : "<<i<<" je: "<<B_mwdc_u1p_hit_wire[i]<<endl;
 #endif
         bigbite->mwdc1->u2WireHit(B_mwdc_u1p_hit_wire[i]);
     } 
 
     for(int i = 0; i<B_mwdc_v1_nhits; i++)
     {
-#if DEBUG_LEVEL >= 3	
-	cout<<"Wire v1 : "<<i<<" je: "<<B_mwdc_v1_hit_wire[i]<<endl;
+#if DEBUG_LEVEL >= 3  
+  cout<<"Wire v1 : "<<i<<" je: "<<B_mwdc_v1_hit_wire[i]<<endl;
 #endif
         bigbite->mwdc1->v1WireHit(B_mwdc_v1_hit_wire[i]);
     } 
 
     for(int i = 0; i<B_mwdc_v1p_nhits; i++)
     {
-#if DEBUG_LEVEL >= 3	
-	cout<<"Wire v1p : "<<i<<" je: "<<B_mwdc_v1p_hit_wire[i]<<endl;
+#if DEBUG_LEVEL >= 3  
+  cout<<"Wire v1p : "<<i<<" je: "<<B_mwdc_v1p_hit_wire[i]<<endl;
 #endif
         bigbite->mwdc1->v2WireHit(B_mwdc_v1p_hit_wire[i]);
     } 
@@ -1174,8 +1176,8 @@ for (int i = 0; i<E_PN; i++)
 
     for(int i = 0; i<B_mwdc_x1_nhits; i++)
     {
-#if DEBUG_LEVEL >= 3	
-	cout<<"Wire x1 : "<<i<<" je: "<<B_mwdc_x1_hit_wire[i]<<endl;
+#if DEBUG_LEVEL >= 3  
+  cout<<"Wire x1 : "<<i<<" je: "<<B_mwdc_x1_hit_wire[i]<<endl;
 #endif
         bigbite->mwdc1->x1WireHit(B_mwdc_x1_hit_wire[i]);
     } 
@@ -1183,8 +1185,8 @@ for (int i = 0; i<E_PN; i++)
 
     for(int i = 0; i<B_mwdc_x1p_nhits; i++)
     {
-#if DEBUG_LEVEL >= 3	
-	cout<<"Wire x1p : "<<i<<" je: "<<B_mwdc_x1p_hit_wire[i]<<endl;
+#if DEBUG_LEVEL >= 3  
+  cout<<"Wire x1p : "<<i<<" je: "<<B_mwdc_x1p_hit_wire[i]<<endl;
 #endif
         bigbite->mwdc1->x2WireHit(B_mwdc_x1p_hit_wire[i]);
     } 
@@ -1195,16 +1197,16 @@ for (int i = 0; i<E_PN; i++)
     bigbite->mwdc2->clear();
     for(int i = 0; i<B_mwdc_u2_nhits; i++)
     {
-#if DEBUG_LEVEL >= 3	
-	cout<<"Wire u2 : "<<i<<" je: "<<B_mwdc_u2_hit_wire[i]<<endl;
+#if DEBUG_LEVEL >= 3  
+  cout<<"Wire u2 : "<<i<<" je: "<<B_mwdc_u2_hit_wire[i]<<endl;
 #endif
         bigbite->mwdc2->u1WireHit(B_mwdc_u2_hit_wire[i]);
     } 
 
     for(int i = 0; i<B_mwdc_u2p_nhits; i++)
     {
-#if DEBUG_LEVEL >= 3	
-	cout<<"Wire u2p : "<<i<<" je: "<<B_mwdc_u2p_hit_wire[i]<<endl;
+#if DEBUG_LEVEL >= 3  
+  cout<<"Wire u2p : "<<i<<" je: "<<B_mwdc_u2p_hit_wire[i]<<endl;
 #endif
         bigbite->mwdc2->u2WireHit(B_mwdc_u2p_hit_wire[i]);
     } 
@@ -1212,16 +1214,16 @@ for (int i = 0; i<E_PN; i++)
 
     for(int i = 0; i<B_mwdc_v2_nhits; i++)
     {
-#if DEBUG_LEVEL >= 3	
-	cout<<"Wire v2 : "<<i<<" je: "<<B_mwdc_v2_hit_wire[i]<<endl;
+#if DEBUG_LEVEL >= 3  
+  cout<<"Wire v2 : "<<i<<" je: "<<B_mwdc_v2_hit_wire[i]<<endl;
 #endif
         bigbite->mwdc2->v1WireHit(B_mwdc_v2_hit_wire[i]);
     } 
 
     for(int i = 0; i<B_mwdc_v2p_nhits; i++)
     {
-#if DEBUG_LEVEL >= 3	
-	cout<<"Wire v2p : "<<i<<" je: "<<B_mwdc_v2p_hit_wire[i]<<endl;
+#if DEBUG_LEVEL >= 3  
+  cout<<"Wire v2p : "<<i<<" je: "<<B_mwdc_v2p_hit_wire[i]<<endl;
 #endif
         bigbite->mwdc2->v2WireHit(B_mwdc_v2p_hit_wire[i]);
     } 
@@ -1229,8 +1231,8 @@ for (int i = 0; i<E_PN; i++)
 
     for(int i = 0; i<B_mwdc_x2_nhits; i++)
     {
-#if DEBUG_LEVEL >= 3	
-	cout<<"Wire x2 : "<<i<<" je: "<<B_mwdc_x2_hit_wire[i]<<endl;
+#if DEBUG_LEVEL >= 3  
+  cout<<"Wire x2 : "<<i<<" je: "<<B_mwdc_x2_hit_wire[i]<<endl;
 #endif
         bigbite->mwdc2->x1WireHit(B_mwdc_x2_hit_wire[i]);
     } 
@@ -1238,12 +1240,12 @@ for (int i = 0; i<E_PN; i++)
 
     for(int i = 0; i<B_mwdc_x2p_nhits; i++)
     {
-#if DEBUG_LEVEL >= 3	
-	cout<<"Wire x2p : "<<i<<" je: "<<B_mwdc_x2p_hit_wire[i]<<endl;
+#if DEBUG_LEVEL >= 3  
+  cout<<"Wire x2p : "<<i<<" je: "<<B_mwdc_x2p_hit_wire[i]<<endl;
 #endif
         bigbite->mwdc2->x2WireHit(B_mwdc_x2p_hit_wire[i]);
     } 
-
+*/
     /* Now scintillaion plane
     bigbite->scintdE->clear();
     bigbite->scintE->clear();
@@ -1255,75 +1257,75 @@ for (int i = 0; i<E_PN; i++)
     bigbite->ClearTracks();
 
     // Now let's draw partial tracks through wire chambers
-#if DEBUG_LEVEL >= 3	
+#if DEBUG_LEVEL >= 3  
     cout<<"Number of Partial Tracks: "<<B_tr_n<<endl;
 #endif
 
     if (B_tr_n>0 && fTextButtonTrack->IsOn())
-    {		
-	for(int q =0; q<B_tr_n; q++)
-	{
-	    if (q < 10)
-	    {
-		double x0 = B_tr_x[q];
-		double y0 = B_tr_y[q];
- 		double th = B_tr_th[q];
-		double ph = B_tr_ph[q];
+    {   
+  for(int q =0; q<B_tr_n; q++)
+  {
+      if (q < 10)
+      {
+    double x0 = B_tr_x[q];
+    double y0 = B_tr_y[q];
+    double th = B_tr_th[q];
+    double ph = B_tr_ph[q];
 
-		bigbite->partialTrack[q]->Track(100.0*x0, 100.0*y0, 0.0, th, ph);
-	    }
-	}
+    bigbite->partialTrack[q]->Track(100.0*x0, 100.0*y0, 0.0, th, ph);
+      }
+  }
   
     }
 
 #if FULL_TRACK > 0
     if (B_tr_n>0 && fTextButtonTrack->IsOn()) // check if we should proceed at all
-    { 	 
+    {    
       for(int q = 0; q<B_tr_n; q++)
       {
-	if (q<10)  // for now we support only 10 tracks
-	{
+  if (q<10)  // for now we support only 10 tracks
+  {
 
-	  double BB_px  = cos(BB_angle)*B_tr_px[q] - sin(BB_angle)*B_tr_pz[q];
-	  double BB_pz  = sin(BB_angle)*B_tr_px[q] + cos(BB_angle)*B_tr_pz[q];
-	  double BB_py  = B_tr_py[q];
+    double BB_px  = cos(BB_angle)*B_tr_px[q] - sin(BB_angle)*B_tr_pz[q];
+    double BB_pz  = sin(BB_angle)*B_tr_px[q] + cos(BB_angle)*B_tr_pz[q];
+    double BB_py  = B_tr_py[q];
  
-#if DEBUG_LEVEL >= 3	
+#if DEBUG_LEVEL >= 3  
           cout<<"----->"<<q<<endl;
           cout<<"BB.tr.x: "<<B_tr_x[q]<<endl;
-	  cout<<"BB.tr.x: "<<B_tr_y[q]<<endl;
-	  cout<<"BB.tr.th: "<<B_tr_th[q]<<endl;
-	  cout<<"BB.tr.ph: "<<B_tr_ph[q]<<endl;
+    cout<<"BB.tr.x: "<<B_tr_y[q]<<endl;
+    cout<<"BB.tr.th: "<<B_tr_th[q]<<endl;
+    cout<<"BB.tr.ph: "<<B_tr_ph[q]<<endl;
 
-	  cout<<"LAB. Momentum px: "<<B_tr_px[q]<<endl;
-	  cout<<"LAB. Momentum py: "<<B_tr_py[q]<<endl;
-	  cout<<"LAB. Momentum pz: "<<B_tr_pz[q]<<endl;
-	  cout<<"------------------"<<endl;
+    cout<<"LAB. Momentum px: "<<B_tr_px[q]<<endl;
+    cout<<"LAB. Momentum py: "<<B_tr_py[q]<<endl;
+    cout<<"LAB. Momentum pz: "<<B_tr_pz[q]<<endl;
+    cout<<"------------------"<<endl;
 
 
-	  cout<<"BB. Momentum px: "<<BB_px<<endl;
-	  cout<<"BB. Momentum py: "<<BB_py<<endl;
-	  cout<<"BB. Momentum pz: "<<BB_pz<<endl;
-	  cout<<"BB. Momentum p: "<<B_tr_p[q]<<endl;
+    cout<<"BB. Momentum px: "<<BB_px<<endl;
+    cout<<"BB. Momentum py: "<<BB_py<<endl;
+    cout<<"BB. Momentum pz: "<<BB_pz<<endl;
+    cout<<"BB. Momentum p: "<<B_tr_p[q]<<endl;
 
 #endif
-	  bigbite->fullTrack[q]->Track(BB_px, BB_py, BB_pz, 100.0*B_tr_x[q], 100.0*B_tr_y[q], 0.0, B_tr_th[q], B_tr_ph[q]);
-	}
-#if DEBUG_LEVEL >= 3	
-	else cout<<"Track is not valid!"<<endl;
+    bigbite->fullTrack[q]->Track(BB_px, BB_py, BB_pz, 100.0*B_tr_x[q], 100.0*B_tr_y[q], 0.0, B_tr_th[q], B_tr_ph[q]);
+  }
+#if DEBUG_LEVEL >= 3  
+  else cout<<"Track is not valid!"<<endl;
 #endif
       }
     }
 #endif
     
 
-    bigbite->mgr->GetMasterVolume()->Raytrace();	
+    bigbite->mgr->GetMasterVolume()->Raytrace();  
     c5->Update();
     cout<<"Thanks! I am done!"<<endl;
   
   } 
  
-#if DEBUG_LEVEL >= 3	
+#if DEBUG_LEVEL >= 3  
   cout<<"Event number is: "<<EventNumber<<endl;
 #endif
 
@@ -1371,8 +1373,8 @@ void EVe::doNextGood()
     fNumberEntry1->SetNumber(EventNumber); // write that to the display 
     if (B_tr_n > 0.0) // check if event is good (if there is at least 1 good track).
     { 
-	DoDraw(EventNumber);
-	break;
+  DoDraw(EventNumber);
+  break;
     }
   }  
 }
@@ -1387,8 +1389,8 @@ void EVe::doPreviousGood()
     fNumberEntry1->SetNumber(EventNumber); // write that to the display 
     if (B_tr_n > 0.0) // check if event is good (if there is at least 1 good track).
     { 
-	DoDraw(EventNumber);
-	break;
+  DoDraw(EventNumber);
+  break;
     }
   }  
 }
