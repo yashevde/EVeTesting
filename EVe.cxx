@@ -545,14 +545,14 @@ void EVe::DoDraw(int event)
     title->SetTextSize(0.03);
     title->Draw();   
 
-    for (int i = 0; i<B_mwdc_u1_nhits; i++)
+    for (int i = 0; i<10; i++)
     {
 #if DEBUG_LEVEL >= 3
         cout<<"***** U1 Wire No.: "<<B_mwdc_u1_hit_wire[i]<<" is: "<<B_mwdc_u1_hit_time[i]<<endl;
 #endif
         u1->SetWire(Fake_hit[i],1.0E9*1); 
     }
-    
+/*    
     for (int i = 0; i<B_mwdc_u1p_nhits; i++)
     {
 #if DEBUG_LEVEL >= 3
@@ -576,7 +576,7 @@ void EVe::DoDraw(int event)
 #endif
         u2p->SetWire(B_mwdc_u2p_hit_wire[i],1.0E9*B_mwdc_u2p_hit_time[i]); 
     }
-
+*/
     umrd->Clear();
     for (int q=0; q< MAX_ROADS_NUM; q++) utr[q]->Clear();
 
@@ -645,7 +645,7 @@ cout<<"Sem tlele 5"<<endl;
   }
 
 //_________________________ Lets handle v-projection view ______________________________
-
+/*
   if (fTextButtonProj->IsOn() && fTextButtonVPlane->IsOn())
   {
 
@@ -868,7 +868,7 @@ cout<<"Sem tlele 5"<<endl;
     c4->Draw();
     c4->Update(); 
   }
-
+*/
 
 //_________________________ Lets handle Planar view  ______________________________
 
@@ -894,14 +894,14 @@ cout<<"Sem tlele 5"<<endl;
 #endif
 
     mwdc1->clear();
-    for(int i = 0; i<B_mwdc_u1_nhits; i++)
+    for(int i = 0; i<10; i++)
     {
 #if DEBUG_LEVEL >= 3
   cout<<"Wire u1 : "<<i<<" je: "<<B_mwdc_u1_hit_wire[i]<<endl;
 #endif
-        mwdc1->u1WireHit(B_mwdc_u1_hit_wire[i]);
+        mwdc1->u1WireHit(Fake_hit[i]);
     } 
-
+/*
     for(int i = 0; i<B_mwdc_u1p_nhits; i++)
     {
 #if DEBUG_LEVEL >= 3
@@ -944,10 +944,10 @@ cout<<"Sem tlele 5"<<endl;
 #endif
         mwdc1->x2WireHit(B_mwdc_x1p_hit_wire[i]);
     } 
-
+*/
 
     //***************** Second Chamber
-
+/*
 #if DEBUG_LEVEL >= 3
     cout<<"Plane U2 has been hit ... times: "<<B_mwdc_u2_nhits<<endl;
     cout<<"Plane U2p has been hit ... times: "<<B_mwdc_u2p_nhits<<endl;
@@ -999,7 +999,7 @@ cout<<"Sem tlele 5"<<endl;
 #endif
         mwdc2->x1WireHit(B_mwdc_x2_hit_wire[i]);
     } 
-
+*/
 
     for(int i = 0; i<B_mwdc_x2p_nhits; i++)
     {
